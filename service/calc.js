@@ -13,8 +13,18 @@ function calc(s) {
     const stack = []
     let sign = '+'
     let num = 0
+    let c
     for(i =0; i< s.length; i++){
-        c = s[i]
+        let k = i
+        if(isDigit(s[k])){
+            c = ''
+            while(k<s.length && isDigit(s[k])){
+                c += s[k]
+                k++;
+            }
+            i = k-1;
+        }else
+            c = s[i];
         if(isDigit(c))
             num = Number(c);
         if(i + 1 == s.length || (c == '+' || c == '-' || c == '*' || c == '/')){
