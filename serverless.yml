@@ -69,5 +69,4 @@ custom:
   config:
     dev:
       resources:
-        s3bucketArn: ['arn:aws:s3:::aws-cloudtrail-logs-806684504090-f43b4996', 'arn:aws:s3:::aws-cloudtrail-logs-806684504090-f43b4996/*']
-        # s3bucketArn: ['arn:aws:s3:::<your-bucket-name>', 'arn:aws:s3:::<your-bucket-name>/*']
+        s3bucketArn: ['arn:aws:s3:::<your-bucket-name>', 'arn:aws:s3:::<your-bucket-name>/*']
