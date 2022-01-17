@@ -65,14 +65,19 @@ router.post('/register', async (req, res, next) => {
 
 const getUser = async (authorization) => {
     if (!authorization || !authorization.includes('Bearer'))
-        throw new UnauthorizedError('user_required', {
-            message: 'user not found'
+        throw new UnauthorizedError('token_required', {
+            message: 'Bearer Token required!'
         })
     console.log(authorization.split(' '));
     const token = authorization.split(' ')[1];
-    
-    const payload = jwt.decode(token, process.env.APP_SECRET);
-    return payload.user;
+    try{
+        const payload = jwt.decode(token, process.env.APP_SECRET);
+        return payload.user;
+    }catch(e){
+        throw new UnauthorizedError('token_invalid', {
+            message: 'Bearer token invalid!'
+        })
+    }
 }
 
 module.exports = router;
