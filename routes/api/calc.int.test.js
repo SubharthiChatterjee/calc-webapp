@@ -82,4 +82,20 @@ describe('Calc Operations', () =>{
         
         expect(logsRes.data.data.length < 11).toBe(true)
     });
+
+    it('without authorization, calc and logs should throw unauthorized exception', async() => {
+        
+        const calcRes =  await client.post('/calc', {
+            expression: '2+2*2'
+        });
+        expect(calcRes.data.errors.error.status).toBe(401)
+        expect(calcRes.data.errors.error.name).toBe('UnauthorizedError')
+        expect(calcRes.data.errors.error.message).toBe('Bearer Token required!')
+
+        const logsRes = await client.get('/logs');
+        expect(logsRes.data.errors.error.status).toBe(401)
+        expect(logsRes.data.errors.error.name).toBe('UnauthorizedError')
+        expect(logsRes.data.errors.error.message).toBe('Bearer Token required!')
+    });
+
 })
