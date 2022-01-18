@@ -68,7 +68,6 @@ const getUser = async (authorization) => {
         throw new UnauthorizedError('token_required', {
             message: 'Bearer Token required!'
         })
-    console.log(authorization.split(' '));
     const token = authorization.split(' ')[1];
     try{
         const payload = jwt.decode(token, process.env.APP_SECRET);
